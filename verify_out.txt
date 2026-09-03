@@ -1,0 +1,15 @@
+{(2, 1, 1, 1)}
+integral: x*acos(x) - sqrt(1 - x**2)
+check diff: 0
+classify: ('factorable', 'separable', '1st_power_series', 'lie_group', 'separable_Integral')
+dsolve: Eq(y(x), LambertW(C1 + x*exp(x - 1) - exp(x - 1)) + 1)
+roots on axes: [0]
+d1: (1 - x**2)/(x**4 + 2*x**2 + 1)
+critical points: [-1, 1]
+d2: 2*x*(x**2 - 3)/(x**2 + 1)**3
+inflection points: [0, -sqrt(3), sqrt(3)]
+y at -1 = -1/2 d2 sign: 1/2
+y at 1 = 1/2 d2 sign: -1/2
+y at infl 0 = 0
+y at infl -sqrt(3) = -sqrt(3)/4
+y at infl sqrt(3) = sqrt(3)/4
