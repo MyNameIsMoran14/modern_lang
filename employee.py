@@ -1,5 +1,5 @@
 # %% [markdown]
-# ### Лабораторная работа: ООП и словари в Python
+# # Тараева Маргарита ВИИМ32 Лабораторная работа: ООП и словари в Python
 
 # %% [markdown]
 # ## Задание 1. Кнопка Button
@@ -21,24 +21,27 @@ class Button:
         self._count = 0
 
 # %%
-button = Button()
-button.click()
-print(button.click_count())
+button1 = Button()
+button1.click()
+print(button1.click_count())
 
-button = Button()
-button.click()
-button.click()
-print(button.click_count())
-button.click()
-print(button.click_count())
+# %%
+button2 = Button()
+button2.click()
+button2.click()
+print(button2.click_count())
+button2.click()
+print(button2.click_count())
 
-button = Button()
-button.click()
-button.click()
-print(button.click_count())
-button.reset()
-button.click()
-print(button.click_count())
+# %%
+button3 = Button()
+button3.click()
+button3.click()
+print(button3.click_count())
+button3.reset()
+button3.click()
+print(button3.click_count())
+
 
 # %% [markdown]
 # ## Задание 2. Весы Balance
@@ -63,19 +66,21 @@ class Balance:
         return "R" if self._right > self._left else "L"
 
 # %%
-balance = Balance()
-balance.add_right(10)
-balance.add_left(9)
-balance.add_left(2)
-print(balance.result())
+balance1 = Balance()
+balance1.add_right(10)
+balance1.add_left(9)
+balance1.add_left(2)
+print(balance1.result())
 
-balance = Balance()
-balance.add_right(10)
-balance.add_left(5)
-balance.add_left(5)
-print(balance.result())
-balance.add_left(1)
-print(balance.result())
+# %%
+balance2 = Balance()
+balance2.add_right(10)
+balance2.add_left(5)
+balance2.add_left(5)
+print(balance2.result())
+balance2.add_left(1)
+print(balance2.result())
+
 
 # %% [markdown]
 # ## Задание 3. BoundingRectangle
@@ -111,20 +116,22 @@ class BoundingRectangle:
         return self.top_y() - self.bottom_y()
 
 # %%
-rect = BoundingRectangle()
-rect.add_point(-1, -2)
-rect.add_point(3, 4)
-print(rect.left_x(), rect.right_x())
-print(rect.bottom_y(), rect.top_y())
-print(rect.width(), rect.height())
+rect1 = BoundingRectangle()
+rect1.add_point(-1, -2)
+rect1.add_point(3, 4)
+print(rect1.left_x(), rect1.right_x())
+print(rect1.bottom_y(), rect1.top_y())
+print(rect1.width(), rect1.height())
 
-rect = BoundingRectangle()
-rect.add_point(10, 20)
-rect.add_point(5, 7)
-rect.add_point(6, 3)
-print(rect.left_x(), rect.right_x())
-print(rect.bottom_y(), rect.top_y())
-print(rect.width(), rect.height())
+# %%
+rect2 = BoundingRectangle()
+rect2.add_point(10, 20)
+rect2.add_point(5, 7)
+rect2.add_point(6, 3)
+print(rect2.left_x(), rect2.right_x())
+print(rect2.bottom_y(), rect2.top_y())
+print(rect2.width(), rect2.height())
+
 
 # %% [markdown]
 # ## Задание 4. FoodInfo
@@ -165,12 +172,14 @@ print(food1.get_proteins(), food1.get_fats(), food1.get_carbohydrates(), food1.g
 print(food2.get_proteins(), food2.get_fats(), food2.get_carbohydrates(), food2.get_kcalories())
 print(food3.get_proteins(), food3.get_fats(), food3.get_carbohydrates(), food3.get_kcalories())
 
-food1 = FoodInfo(1, 2, 3)
-food2 = FoodInfo(10, 20, 30)
-food3 = food1 + food2
-food4 = food2 + food1
-print(food3.get_proteins(), food3.get_fats(), food3.get_carbohydrates(), food3.get_kcalories())
-print(food4.get_proteins(), food4.get_fats(), food4.get_carbohydrates(), food4.get_kcalories())
+# %%
+food4 = FoodInfo(1, 2, 3)
+food5 = FoodInfo(10, 20, 30)
+food6 = food4 + food5
+food7 = food5 + food4
+print(food6.get_proteins(), food6.get_fats(), food6.get_carbohydrates(), food6.get_kcalories())
+print(food7.get_proteins(), food7.get_fats(), food7.get_carbohydrates(), food7.get_kcalories())
+
 
 # %% [markdown]
 # ## Задание 5. Table (двумерная таблица)
@@ -240,34 +249,36 @@ print(k.email)  # prince@still.wait
 # %% [markdown]
 # ## Задание 7. Money
 #
-# Хранит состояние в `total_cents`; `dollars`/`cents` — свойства с валидацией.
+# Хранит состояние в `total_cents`; `dollars`/`cents` реализованы через
+# декораторы `@property`/`@dollars.setter` (как в задании 8), а не через
+# `property(getter, setter)`.
 
 # %%
 class Money:
     def __init__(self, dollars, cents):
         self.total_cents = dollars * 100 + cents
 
-    def get_dollars(self):
+    @property
+    def dollars(self):
         return self.total_cents // 100
 
-    def set_dollars(self, new_dollars):
+    @dollars.setter
+    def dollars(self, new_dollars):
         if isinstance(new_dollars, int) and new_dollars >= 0:
             self.total_cents = new_dollars * 100 + self.cents
         else:
             print("Error dollars")
 
-    dollars = property(get_dollars, set_dollars)
-
-    def get_cents(self):
+    @property
+    def cents(self):
         return self.total_cents % 100
 
-    def set_cents(self, new_cents):
+    @cents.setter
+    def cents(self, new_cents):
         if isinstance(new_cents, int) and 0 <= new_cents < 100:
             self.total_cents = self.dollars * 100 + new_cents
         else:
             print("Error cents")
-
-    cents = property(get_cents, set_cents)
 
     def __str__(self):
         return f"Ваше состояние составляет {self.dollars} долларов {self.cents} центов"
@@ -475,6 +486,7 @@ for ans in is_ancestor_all(class_lines, query_lines):
 # ## Задание 13. Частота букв в строке
 #
 # Подсчитать количество каждой буквы и отсортировать: а) по алфавиту, б) по возрастанию частоты.
+# Дополнительно: можно запросить конкретную букву и узнать, сколько раз она встретилась.
 
 # %%
 from collections import Counter
@@ -485,26 +497,78 @@ def letter_frequency(text):
     by_frequency = sorted(counts.items(), key=lambda kv: kv[1])
     return counts, by_alphabet, by_frequency
 
+def count_letter(counts, letter):
+    return counts.get(letter.lower(), 0)
+
 # %%
 counts, by_alphabet, by_frequency = letter_frequency("abracadabra")
 print("По алфавиту:", by_alphabet)
 print("По возрастанию частоты:", by_frequency)
 
 # %% [markdown]
-# ## Задание 14. Англо-русский словарь с вариантами переводов
-#
-# Каждому слову соответствует список возможных переводов.
+# Запросить конкретную букву через ввод с клавиатуры:
 
 # %%
-english_russian = {}
+letter = input("Какую букву посчитать? ").strip()
+print(f"Буква '{letter}' встречается {count_letter(counts, letter)} раз(а)")
+
+# %% [markdown]
+# ## Задание 14. Англо-русский словарь с вариантами переводов
+#
+# Каждому слову соответствует список возможных переводов. Словарь работает в
+# любую сторону — неважно, вводите вы английское слово или русское: `translate()`
+# просто ищет переданную строку как ключ. Дополнительно:
+# - словарь сохраняется в файл `english_russian_dict.json` при каждом добавлении
+#   перевода, а при повторном запуске ноутбука уже сохранённые слова
+#   подгружаются из файла автоматически;
+# - если запросить перевод слова (русского или английского), которого ещё нет
+#   в словаре, `translate()` сама спросит перевод через `input()` и запомнит
+#   его — вы вписываете перевод сами, и при следующем обращении к этому слову
+#   он уже найдётся без повторного ввода;
+# - `translate(word)` выводит перевод только **конкретного** слова, а не всего
+#   словаря; чтобы увидеть словарь целиком, есть отдельная функция
+#   `show_dictionary()` — она вызывается только по явному запросу;
+# - есть также `interactive_add()` для ручного пополнения словаря сразу
+#   несколькими словами через ввод строк в консоли (можно добавлять пары
+#   в любом направлении, например `fish - рыба` или `рыба - fish`); она больше
+#   не печатает весь словарь после завершения — для этого нужно отдельно
+#   вызвать `show_dictionary()`.
+
+# %%
+import json
+import os
+
+DICT_FILE = 'english_russian_dict.json'
+
+def load_dictionary():
+    if os.path.exists(DICT_FILE):
+        with open(DICT_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+def save_dictionary():
+    with open(DICT_FILE, 'w', encoding='utf-8') as f:
+        json.dump(english_russian, f, ensure_ascii=False, indent=2)
+
+english_russian = load_dictionary()
 
 def add_translation(word, translation):
     english_russian.setdefault(word, [])
     if translation not in english_russian[word]:
         english_russian[word].append(translation)
+        save_dictionary()
 
 def translate(word):
+    if not english_russian.get(word):
+        print(f"Слово '{word}' не найдено в словаре.")
+        new_translation = input(f"Введите перевод для '{word}': ").strip()
+        if new_translation:
+            add_translation(word, new_translation)
     return english_russian.get(word, [])
+
+def show_dictionary():
+    for word, translations in english_russian.items():
+        print(f"{word}: {translations}")
 
 # %%
 add_translation("bank", "банк")
@@ -515,23 +579,190 @@ add_translation("spring", "родник")
 
 print(translate("bank"))
 print(translate("spring"))
-print(translate("unknown"))
+
+print()
+print("Весь словарь целиком (по отдельному запросу show_dictionary()):")
+show_dictionary()
+
+# %% [markdown]
+# Попробуйте запросить слово, которого ещё нет в словаре — программа спросит перевод сама:
+
+# %%
+word = input("Какое слово перевести? ").strip()
+print(translate(word))
+
+
+# %% [markdown]
+# Ручное пополнение словаря через консоль. Функция читает строки вида
+# `слово - перевод` до тех пор, пока не введено слово `стоп`. Каждое
+# добавленное слово сразу сохраняется в файл `english_russian_dict.json`,
+# поэтому при следующем запуске ноутбука оно уже будет доступно через
+# `translate(...)`.
+
+# %%
+def interactive_add():
+    print("Формат ввода: слово - перевод (например: bank - банк)")
+    print("Для завершения введите 'стоп'")
+    while True:
+        line = input("Добавить перевод: ").strip()
+        if line.lower() == 'стоп':
+            break
+        if ' - ' not in line:
+            print("Неверный формат, повторите: слово - перевод")
+            continue
+        word, translation = line.split(' - ', 1)
+        add_translation(word.strip(), translation.strip())
+        print(f"Добавлено: {word.strip()} -> {translation.strip()}")
+
+interactive_add()
 
 # %% [markdown]
 # ## Задание 15. В какой стране находится город?
+#
+# Обычный словарь, без сторонних библиотек. Исходные данные организованы по
+# странам — `страна -> список городов` (`_cities_by_country`), это и читать,
+# и дополнять проще, чем плоский список "город: страна". Из него автоматически
+# собирается рабочий словарь `город -> страна` для быстрого поиска:
+# - внутри уже около 70 крупных городов по ~60 странам мира;
+# - словарь сохраняется в файл `city_to_country_dict.json` при каждом добавлении
+#   города, а при повторном запуске ноутбука добавленные города подгружаются
+#   обратно автоматически;
+# - `add_city(city, country)` добавляет новый город вручную из кода;
+# - `interactive_add_city()` позволяет добавлять города через ввод строк
+#   в консоли (формат `город - страна`);
+# - `get_country(city)` возвращает страну только для одного запрошенного
+#   города, а `show_cities()` — печатает весь словарь целиком, но только
+#   по отдельному явному запросу.
 
 # %%
-city_to_country = {
-    "Paris": "Франция",
-    "Berlin": "Германия",
-    "Tokyo": "Япония",
-    "Moscow": "Россия",
-    "Rome": "Италия",
+import json
+import os
+
+CITY_DICT_FILE = 'city_to_country_dict.json'
+
+_cities_by_country = {
+    "Россия": ["Москва", "Санкт-Петербург", "Ростов-на-Дону", "Владивосток",
+               "Новосибирск", "Казань", "Екатеринбург", "Сочи"],
+    "Франция": ["Париж"],
+    "Германия": ["Берлин"],
+    "Япония": ["Токио"],
+    "Италия": ["Рим"],
+    "Испания": ["Мадрид"],
+    "Великобритания": ["Лондон"],
+    "Китай": ["Пекин", "Шанхай"],
+    "Египет": ["Каир"],
+    "Канада": ["Оттава", "Торонто"],
+    "Австралия": ["Канберра", "Сидней"],
+    "Бразилия": ["Бразилиа", "Рио-де-Жанейро"],
+    "США": ["Вашингтон", "Нью-Йорк", "Лос-Анджелес"],
+    "Украина": ["Киев"],
+    "Беларусь": ["Минск"],
+    "Польша": ["Варшава"],
+    "Чехия": ["Прага"],
+    "Австрия": ["Вена"],
+    "Нидерланды": ["Амстердам"],
+    "Швеция": ["Стокгольм"],
+    "Норвегия": ["Осло"],
+    "Финляндия": ["Хельсинки"],
+    "Греция": ["Афины"],
+    "Португалия": ["Лиссабон"],
+    "Ирландия": ["Дублин"],
+    "Бельгия": ["Брюссель"],
+    "Дания": ["Копенгаген"],
+    "Венгрия": ["Будапешт"],
+    "Румыния": ["Бухарест"],
+    "Болгария": ["София"],
+    "Турция": ["Анкара", "Стамбул"],
+    "Иран": ["Тегеран"],
+    "Ирак": ["Багдад"],
+    "Саудовская Аравия": ["Эр-Рияд"],
+    "Индия": ["Нью-Дели"],
+    "Таиланд": ["Бангкок"],
+    "Вьетнам": ["Ханой"],
+    "Южная Корея": ["Сеул"],
+    "Филиппины": ["Манила"],
+    "Индонезия": ["Джакарта"],
+    "Малайзия": ["Куала-Лумпур"],
+    "Новая Зеландия": ["Веллингтон"],
+    "Аргентина": ["Буэнос-Айрес"],
+    "Чили": ["Сантьяго"],
+    "Перу": ["Лима"],
+    "Колумбия": ["Богота"],
+    "Венесуэла": ["Каракас"],
+    "Мексика": ["Мехико"],
+    "Куба": ["Гавана"],
+    "ЮАР": ["Йоханнесбург"],
+    "Кения": ["Найроби"],
+    "Нигерия": ["Лагос"],
+    "Алжир": ["Алжир"],
+    "Марокко": ["Касабланка"],
+    "Казахстан": ["Алматы"],
+    "Узбекистан": ["Ташкент"],
+    "Азербайджан": ["Баку"],
+    "Армения": ["Ереван"],
+    "Грузия": ["Тбилиси"],
+    "Молдова": ["Кишинёв"],
 }
+
+_default_cities = {
+    city: country
+    for country, cities in _cities_by_country.items()
+    for city in cities
+}
+
+def load_cities():
+    if os.path.exists(CITY_DICT_FILE):
+        with open(CITY_DICT_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return dict(_default_cities)
+
+def save_cities():
+    with open(CITY_DICT_FILE, 'w', encoding='utf-8') as f:
+        json.dump(city_to_country, f, ensure_ascii=False, indent=2)
+
+city_to_country = load_cities()
+
+def add_city(city, country):
+    city_to_country[city] = country
+    save_cities()
 
 def get_country(city):
     return city_to_country.get(city, "Неизвестно")
 
+def show_cities():
+    for city, country in city_to_country.items():
+        print(f"{city}: {country}")
+
+print(f"Городов в словаре: {len(city_to_country)}")
+
 # %%
-for city in ["Paris", "Tokyo", "Atlantis"]:
+for city in ["Ростов-на-Дону", "Москва", "Париж", "Владивосток"]:
     print(city, "->", get_country(city))
+
+
+# %% [markdown]
+# Ручное пополнение словаря городов через консоль (формат `город - страна`):
+
+# %%
+def interactive_add_city():
+    print("Формат ввода: город - страна (например: Калининград - Россия)")
+    print("Для завершения введите 'стоп'")
+    while True:
+        line = input("Добавить город: ").strip()
+        if line.lower() == 'стоп':
+            break
+        if ' - ' not in line:
+            print("Неверный формат, повторите: город - страна")
+            continue
+        city, country = line.split(' - ', 1)
+        add_city(city.strip(), country.strip())
+        print(f"Добавлено: {city.strip()} -> {country.strip()}")
+
+interactive_add_city()
+
+# %% [markdown]
+# Ввод города вручную для поиска страны (можно по-русски):
+
+# %%
+city = input("Введите название города: ").strip()
+print(get_country(city))
